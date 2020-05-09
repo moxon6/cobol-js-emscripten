@@ -5,5 +5,6 @@ cd gnucobol-3.0-rc1
 ./configure --with-db=false
 make clean
 make
+# make check
 make install
 ldconfig
