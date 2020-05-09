@@ -1,0 +1,1 @@
+cobc -free -x -o out/helloworld helloworld.cob
