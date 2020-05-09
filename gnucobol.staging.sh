@@ -1,4 +1,5 @@
 export CC=clang
+export CXX=clang++
 if [[ ! -f gnucobol-3.0-rc1.tar.gz ]]
 then
     wget http://sourceforge.net/projects/open-cobol/files/gnu-cobol/3.0/gnucobol-3.0-rc1.tar.gz
