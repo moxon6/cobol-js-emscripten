@@ -1,0 +1,7 @@
+{
+	"name": "Cobol Wasm Hello World",
+	"dockerFile": "Dockerfile",
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash"
+	}
+}
