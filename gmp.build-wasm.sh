@@ -9,7 +9,7 @@ rm -rf gmp-6.1.2
 tar xvf gmp-6.1.2.tar.xz
 #TODO Add checksum
 cd gmp-6.1.2
-./configure --disable-assembly --host none --enable-cxx
+emconfigure ./configure --disable-assembly --host none --enable-cxx --prefix=${HOME}/opt
 make clean
 make
 # make check
