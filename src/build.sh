@@ -1,3 +1,4 @@
+set -e 
 mkdir -p tmp
 mkdir -p out
 
@@ -19,3 +20,4 @@ emcc --ignore-dynamic-linking -o out/hello.html tmp/hello.c \
   -s NO_EXIT_RUNTIME=1 -s ERROR_ON_UNDEFINED_SYMBOLS=0 -s ASYNCIFY
 
 sed -i '/To use dlopen/s/^/\/\//' out/hello.js # Comment out all dlopen callbacks
+sed -i '/Calling stub instead/s/^/\/\//' out/hello.js # Comment out calling stub callbacks
