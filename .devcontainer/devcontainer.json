@@ -1,5 +1,5 @@
 {
-	"name": "Cobol Wasm Hello World",
+	"name": "COBOL -> JS emscripten",
 	"dockerFile": "Dockerfile",
 	"settings": { 
 		"terminal.integrated.shell.linux": "/bin/bash"
