@@ -7,3 +7,7 @@ int updateDOM() {
 int jsrun(char *hello) {
     emscripten_run_script(hello);
 }
+
+int domSleep() {
+    emscripten_sleep(100);
+}
