@@ -6,5 +6,6 @@
 	},
 	"extensions": [
 		"bitlang.cobol"
-	]
+	],
+	"forwardPorts": [5500],
 }
