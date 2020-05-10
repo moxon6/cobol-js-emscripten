@@ -2,12 +2,13 @@ set -e
 
 # Create output directory
 mkdir -p out
+rm -rf out/*
 
 build_number=$(date -d "today" +"%Y%m%d%H%M")
 echo "Build version: $build_number"
 mkdir -p /tmp/build/$build_number
 
-cobc -C -x -free hello.cob -o /tmp/build/$build_number/out.1.c
+cobc -C -x hello.cob -o /tmp/build/$build_number/out.1.c
 cat c/*.c /tmp/build/$build_number/out.1.c > /tmp/build/$build_number/out.2.c
 
 # Replace dynamic logic for direct function pointers

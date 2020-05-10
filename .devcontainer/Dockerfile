@@ -9,3 +9,5 @@ RUN apt-get update \
 COPY ./*.sh /scripts/
 
 RUN "bash" "/scripts/build.sh"
+
+RUN apt-get install default-jre
