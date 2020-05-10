@@ -8,5 +8,6 @@ WORKING-STORAGE SECTION.
 
 PROCEDURE DIVISION.
     ACCEPT Name.
+    CALL "cobol_emscripten_sleep" USING "T".
     DISPLAY 'Hello world!' Name.
     STOP RUN.
