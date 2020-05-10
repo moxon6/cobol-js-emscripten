@@ -20,7 +20,7 @@ autoreconf -f -i
 
 emconfigure ./configure --with-db=false --disable-assembly --host none --enable-cxx --prefix=${HOME}/opt --includedir=${HOME}/opt/include
 make clean
+make defaults.h
 cd libcob
-make INCLUDES=-I/root/opt/include
-make check
+emmake make INCLUDES=-I/root/opt/include
 make install
