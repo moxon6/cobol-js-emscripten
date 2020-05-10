@@ -1,5 +1,5 @@
 
-FROM trzeci/emscripten
+FROM trzeci/emscripten-upstream
 
 RUN apt-get update \
     && apt-get -y install --no-install-recommends \

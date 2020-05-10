@@ -1,13 +1,11 @@
-
 IDENTIFICATION DIVISION.
-PROGRAM-ID. HELLO-WORLD.
-
-DATA DIVISION.                                                   
-WORKING-STORAGE SECTION.                                         
-01 Name                       PIC 9(03).                          
-
+PROGRAM-ID. hello.
+ENVIRONMENT DIVISION.
+DATA DIVISION.
+WORKING-STORAGE SECTION.
+01 HELLO PIC X(6) VALUE "Hello ".
+01 WORLD PIC X(6) VALUE "Mundo!".
 PROCEDURE DIVISION.
-    ACCEPT Name.
-    CALL "cobol_emscripten_sleep" USING "T".
-    DISPLAY 'Hello world!' Name.
-    STOP RUN.
+CALL "say" USING HELLO WORLD.
+DISPLAY "Potato potato"
+STOP RUN.
