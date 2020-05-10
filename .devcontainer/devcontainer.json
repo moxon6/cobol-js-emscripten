@@ -5,6 +5,6 @@
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
 	"extensions": [
-		"broadcommfd.code4z-extension-pack"
+		"bitlang.cobol"
 	]
 }
