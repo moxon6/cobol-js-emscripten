@@ -1,3 +1,7 @@
+set -e
+mkdir -p /tools/cobol
+cd /tools/cobol
+
 export CC=clang
 export CXX=clang++
 if [[ ! -f gmp-6.1.2.tar.xz ]]

@@ -1,4 +1,6 @@
 set -e
+mkdir -p /tools/cobol
+cd /tools/cobol
 
 #!/bin/bash
 

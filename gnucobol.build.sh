@@ -1,5 +1,9 @@
 set -e
+mkdir -p /tools/cobol
+cd /tools/cobol
+
 export CC=clang
+
 if [[ ! -f gnucobol-3.0-rc1.tar.gz ]]
 then
     wget http://sourceforge.net/projects/open-cobol/files/gnu-cobol/3.0/gnucobol-3.0-rc1.tar.gz
