@@ -20,14 +20,15 @@
            EVALUATE  LastPressed
            WHEN "ArrowLeft" 
                SUBTRACT 10 from XPos
+               Perform Update-Position
            WHEN "ArrowRight" 
                ADD 10 to XPos
+               Perform Update-Position 
            .
-           Perform Update-Position.
               
 
 
-           CALL "em_sleep" using "50"
+           CALL "em_sleep" using "10"
            .
 
            Configure-Environment.
@@ -41,8 +42,7 @@
            Update-Position.
            MOVE SetPositionConst TO SetPosition.
 
-           *> CALL "js_run_async" using FUNCTION SUBSTITUTE(SetPosition, "$position", XPos);
-           DISPLAY XPos
+           CALL "js_run_async" using FUNCTION SUBSTITUTE(SetPosition, "$position", XPos);
            .
        
       

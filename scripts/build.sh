@@ -14,7 +14,9 @@ echo $functions
 
 # Create output directory
 mkdir -p out
-rm -rf out/*
+
+rm -rf out/*.js
+rm -rf out/*.wasm
 
 mkdir -p tmp
 
@@ -33,7 +35,7 @@ cobc $functions -C -x -free cob/*.cob -o $build_path
 
 echo $build_path
 
-emcc -O0 --ignore-dynamic-linking -o out/index.html $build_path c/*.c \
+emcc -O0 --ignore-dynamic-linking -o out/index.js $build_path c/*.c \
   /root/opt/lib/*.a -I/root/opt/include \
   -I/tools/cobol/gnucobol-3.0-rc1 -s FORCE_FILESYSTEM=1 \
   -s NO_EXIT_RUNTIME=1 -s ERROR_ON_UNDEFINED_SYMBOLS=0 -s ASYNCIFY -s 
