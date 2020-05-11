@@ -2,7 +2,11 @@
 
 set -e
 
-functions=`cproto -I/emsdk_portable/upstream/emscripten/system/include /workspaces/cobol-js-emscripten/c/jsrun.c | tail -n +2 | cut -d' ' -f2 | cut -d '(' -f1`
+functions=$(cproto -I/emsdk_portable/upstream/emscripten/system/include /workspaces/cobol-js-emscripten/c/*.c  \
+  | grep -v "/\*"  \
+  | sed '/const /d' \
+  | cut -d' ' -f2  \
+  | cut -d '(' -f1)
 
 
 functions=`echo $functions | sed -e "s/ / -K /g"  | sed 's/^/-K /'`

@@ -4,39 +4,25 @@
        ENVIRONMENT DIVISION.
        DATA DIVISION.
        WORKING-STORAGE SECTION.
-       01 SharedItem     PIC X(40) IS GLOBAL.
+       01 LastPressed     PIC X(40) IS GLOBAL.
        PROCEDURE DIVISION.
        Begin.
-           CALL "boost_stack_size".
-           CALL "InsertData".
-           DISPLAY "Point A".
-           Perform A-PARA.
-           DISPLAY "Point B".
-           Perform A-PARA 4 times.
-           Perform A-PARA 8 times.
-           DISPLAY "After 6".
-           
+           Perform Configure-Environment.
+           Perform Main-Loop 10000 times.
            STOP RUN.
 
-           A-PARA.
-           CALL "updateDOM"
-           DISPLAY "Testing".
-
-              IDENTIFICATION DIVISION.
-              PROGRAM-ID. InsertData.
-              PROCEDURE DIVISION.
-              Begin.
-                  MOVE "Shared area works" TO SharedItem
-                  CALL "DisplayData"
-                  EXIT PROGRAM.
-              END PROGRAM InsertData.
+           Configure-Environment.
+           *> Configure JS environment
+           CALL "startup". *> Configure Asyncify stack size etc
+           CALL "js_run" using "window.lastPressed = 'None'" *> Initialise Key press
+           CALL "js_run" using "window.onkeydown = (e) => window.lastPressed = e.code" *> Setup keydown handler
+           CALL "js_run" using "window.prompt = () => { if(!window.hasEntered) { window.hasEntered = true; return window.lastPressed } else { window.hasEntered=false; return null; } }" *> Patch prompt -> can ACCEPT from lastPressed
+           .
        
-              IDENTIFICATION DIVISION.
-              PROGRAM-ID. DisplayData IS COMMON PROGRAM.
-              PROCEDURE DIVISION.
-              Begin.
-                  DISPLAY SharedItem.
-                  EXIT PROGRAM.
-              END PROGRAM DisplayData.
-       
+           Main-Loop.
+           ACCEPT LastPressed.
+           Display LastPressed.
+           CALL "em_sleep" using "50"
+           .
+      
        END PROGRAM MainProgram.
