@@ -1,17 +1,32 @@
 
        IDENTIFICATION DIVISION.
-       PROGRAM-ID. hello.
+       PROGRAM-ID. MainProgram.
        ENVIRONMENT DIVISION.
        DATA DIVISION.
-
-       WORKING-STORAGE SECTION.       
-       01 UpdateColor PIC X(60) VALUE z"document.body.style.backgroundColor = 'rgb(120,0,0)'".
-       
+       WORKING-STORAGE SECTION.
+       01 SharedItem     PIC X(40) IS GLOBAL.
        PROCEDURE DIVISION.
-       PERFORM UPDATE-COLOR.
+       Begin.
+           CALL "InsertData"
+           MOVE "Main can also use the shared data" TO SharedItem
+           CALL "DisplayData"
+           STOP RUN.
        
-       STOP RUN.
+              IDENTIFICATION DIVISION.
+              PROGRAM-ID. InsertData.
+              PROCEDURE DIVISION.
+              Begin.
+                  MOVE "Shared area works" TO SharedItem
+                  CALL "DisplayData"
+                  EXIT PROGRAM.
+              END PROGRAM InsertData.
        
-       UPDATE-COLOR. 
-       CALL "jsrun" USING UpdateColor
-       CALL "domSleep".
+              IDENTIFICATION DIVISION.
+              PROGRAM-ID. DisplayData IS COMMON PROGRAM.
+              PROCEDURE DIVISION.
+              Begin.
+                  DISPLAY SharedItem.
+                  EXIT PROGRAM.
+              END PROGRAM DisplayData.
+       
+       END PROGRAM MainProgram.
