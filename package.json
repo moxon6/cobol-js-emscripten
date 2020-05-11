@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "./scripts/build.sh",
-    "build:watch": "find c cob -type f | entr ./scripts/build.sh",
+    "build:watch": "find c cob scripts -type f | entr ./scripts/build.sh",
     "start": "cd out && python2 -m SimpleHTTPServer 5500"
   },
   "repository": {

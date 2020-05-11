@@ -7,11 +7,19 @@
        01 SharedItem     PIC X(40) IS GLOBAL.
        PROCEDURE DIVISION.
        Begin.
-           CALL "InsertData"
-           MOVE "Main can also use the shared data" TO SharedItem
-           CALL "DisplayData"
+           CALL "InsertData".
+           DISPLAY "Point A".
+           Perform A-PARA.
+           DISPLAY "Point B".
+           Perform A-PARA 5 times.
+           
            STOP RUN.
-       
+
+           
+           A-PARA.
+           CALL "domSleep"
+           DISPLAY "Testing".
+
               IDENTIFICATION DIVISION.
               PROGRAM-ID. InsertData.
               PROCEDURE DIVISION.
