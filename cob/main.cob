@@ -11,6 +11,12 @@
            Perform Main-Loop 10000 times.
            STOP RUN.
 
+           Main-Loop.
+           ACCEPT LastPressed.
+           Display LastPressed.
+           CALL "em_sleep" using "50"
+           .
+
            Configure-Environment.
            *> Configure JS environment
            CALL "startup". *> Configure Asyncify stack size etc
@@ -19,10 +25,5 @@
            CALL "js_run" using "window.prompt = () => { if(!window.hasEntered) { window.hasEntered = true; return window.lastPressed } else { window.hasEntered=false; return null; } }" *> Patch prompt -> can ACCEPT from lastPressed
            .
        
-           Main-Loop.
-           ACCEPT LastPressed.
-           Display LastPressed.
-           CALL "em_sleep" using "50"
-           .
       
        END PROGRAM MainProgram.
