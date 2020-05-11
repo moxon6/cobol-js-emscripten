@@ -5,7 +5,8 @@
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
 	"extensions": [
-		"bitlang.cobol"
+		"bitlang.cobol",
+		"eamodio.gitlens"
 	],
 	"forwardPorts": [5500],
 }
