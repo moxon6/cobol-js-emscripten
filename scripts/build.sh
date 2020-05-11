@@ -12,28 +12,23 @@ echo $functions
 mkdir -p out
 rm -rf out/*
 
-#build_number=$(date -d "today" +"%Y%m%d%H%M%s")
-build_number="testbuild"
-rm -rf /tmp/cobol-js-builds/$build_number
+mkdir -p tmp
 
+build_num=`find tmp/* -maxdepth 0 -type d | wc -l`
 
+echo "COBOL -> JS - Build version: $build_num"
 
-echo "COBOL -> JS - Build version: $build_number"
-mkdir -p /tmp/cobol-js-builds/$build_number
+build_dir=tmp/build-$build_num
+mkdir -p $build_dir
 
-out1=/tmp/cobol-js-builds/$build_number/out.1.c
+build_path=$build_dir/build.c
+echo $build_path
 
-cobc $functions -C -x -free cob/*.cob -o $out1
-cat c/*.c /tmp/cobol-js-builds/$build_number/out.1.c > /tmp/cobol-js-builds/$build_number/out.2.c
+cobc $functions -C -x -free cob/*.cob -o $build_path
 
-# Replace dynamic logic for direct function pointers
-# sed -r "s/cob_resolve_cobol\ \(\"(.*)\",.*\);/\*\1;/g" /tmp/cobol-js-builds/$build_number/out.2.c >> /tmp/cobol-js-builds/$build_number/out.3.c
+echo $build_path
 
-# sed "s/cob_stop_run .[^M].*//g" /tmp/cobol-js-builds/$build_number/out.3.c >> /tmp/cobol-js-builds/$build_number/out.3.c
-
-echo /tmp/cobol-js-builds/$build_number/out.2.c
-
-emcc --ignore-dynamic-linking -o out/index.html /tmp/cobol-js-builds/$build_number/out.2.c \
+emcc -O0 --ignore-dynamic-linking -o out/index.html $build_path c/*.c \
   /root/opt/lib/*.a -I/root/opt/include \
   -I/tools/cobol/gnucobol-3.0-rc1 -s FORCE_FILESYSTEM=1 \
   -s NO_EXIT_RUNTIME=1 -s ERROR_ON_UNDEFINED_SYMBOLS=0 -s ASYNCIFY -s 
@@ -43,3 +38,4 @@ sed -i '/To use dlopen/s/^/\/\//' out/index.js
 
 # Comment out calling stub callbacks
 sed -i '/Calling stub instead/s/^/\/\//' out/index.js
+echo "Build Complete"

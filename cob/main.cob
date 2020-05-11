@@ -7,17 +7,19 @@
        01 SharedItem     PIC X(40) IS GLOBAL.
        PROCEDURE DIVISION.
        Begin.
+           CALL "boost_stack_size".
            CALL "InsertData".
            DISPLAY "Point A".
            Perform A-PARA.
            DISPLAY "Point B".
-           Perform A-PARA 5 times.
+           Perform A-PARA 4 times.
+           Perform A-PARA 8 times.
+           DISPLAY "After 6".
            
            STOP RUN.
 
-           
            A-PARA.
-           CALL "domSleep"
+           CALL "updateDOM"
            DISPLAY "Testing".
 
               IDENTIFICATION DIVISION.
