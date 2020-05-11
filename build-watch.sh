@@ -1,1 +1,0 @@
-find c cob -type f | entr ./build.sh 
