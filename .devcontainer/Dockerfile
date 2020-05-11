@@ -11,3 +11,4 @@ COPY ./*.sh /scripts/
 RUN "bash" "/scripts/build.sh"
 
 RUN apt-get -y install default-jre
+RUN apt-get -y install entr
