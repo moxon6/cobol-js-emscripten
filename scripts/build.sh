@@ -18,7 +18,8 @@ rm -rf out/*
 
 mkdir -p tmp
 
-build_num=`find tmp/* -maxdepth 0 -type d | wc -l`
+# build_num=`find tmp/* -maxdepth 0 -type d | wc -l`
+build_num="2"
 
 echo "COBOL -> JS - Build version: $build_num"
 

@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 int domUpdate() {
-    emscripten_sleep(10);
+    emscripten_sleep_with_yield(10);
     return 0;
 }
 
