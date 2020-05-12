@@ -1,10 +1,10 @@
 #include <emscripten.h>
 
-EM_JS(void, set_asyncify_stack_size, (int size), {
-  Asyncify.StackSize = size;
+EM_JS(int, set_asyncify_stack_size, (), {
+  Asyncify.StackSize = 512 * 1024;
+  return 0;
 });
 
 int startup() {
-    set_asyncify_stack_size(512 * 1024);
-    return 0;
+    return set_asyncify_stack_size();
 }

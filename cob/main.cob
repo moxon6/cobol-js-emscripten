@@ -11,32 +11,33 @@
        PROCEDURE DIVISION.
        Begin.
            Perform Configure-Environment.
-           Perform Main-Loop 10000 times.
+           CALL "js_run_async" using "document.onmousemove = e => window.lastPressed = e.clientX" *> Setup keydown handler
+
+           Perform Profile-Loop 100000 times.
+
            STOP RUN.
+
+           Profile-Loop.
+           *> CALL "js_run_async" using "document.querySelector('.test').style.left = '5px'"
+           CALL "set_square_pos" using ".test" "200"
+           CALL "em_sleep" using "0"
+           .
 
            Main-Loop.
            ACCEPT LastPressed.
-
-           EVALUATE  LastPressed
-           WHEN "ArrowLeft" 
-               SUBTRACT 10 from XPos
-               Perform Update-Position
-           WHEN "ArrowRight" 
-               ADD 10 to XPos
-               Perform Update-Position 
-           .
-              
-
-
-           CALL "em_sleep" using "10"
+           MOVE FUNCTION NUMVAL(LastPressed) TO XPos
+           DISPLAY XPos.
+           Perform Update-Position
+           CALL "set_square_pos" using "300px"
+           CALL "em_sleep" using "0"
            .
 
            Configure-Environment.
            *> Configure JS environment
            CALL "startup". *> Configure Asyncify stack size etc
-           CALL "js_run" using "window.lastPressed = 'None'" *> Initialise Key press
-           CALL "js_run" using "window.onkeydown = (e) => window.lastPressed = e.code" *> Setup keydown handler
-           CALL "js_run" using "window.prompt = () => { if(!window.hasEntered) { window.hasEntered = true; return window.lastPressed } else { window.hasEntered=false; window.lastPressed = 'None' ; return null; } }" *> Patch prompt -> can ACCEPT from lastPressed
+           CALL "js_run_async" using "window.lastPressed = 'None'" *> Initialise Key press
+           CALL "js_run_async" using "document.onmousemove = e => window.lastPressed = e.clientX" *> Setup keydown handler
+           CALL "js_run_async" using "window.prompt = () => { if(!window.hasEntered) { window.hasEntered = true; return window.lastPressed } else { window.hasEntered=false; return null; } }" *> Patch prompt -> can ACCEPT from lastPressed
            .
 
            Update-Position.

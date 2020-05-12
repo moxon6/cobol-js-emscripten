@@ -31,14 +31,15 @@ mkdir -p $build_dir
 build_path=$build_dir/build.c
 echo $build_path
 
-cobc $functions -C -x -free cob/*.cob -o $build_path
+cobc -K set_square_pos $functions -C -x -free cob/*.cob -o $build_path
 
 echo $build_path
 
 emcc -O0 --ignore-dynamic-linking -o out/index.js $build_path c/*.c \
   /root/opt/lib/*.a -I/root/opt/include \
   -I/tools/cobol/gnucobol-3.0-rc1 -s FORCE_FILESYSTEM=1 \
-  -s NO_EXIT_RUNTIME=1 -s ERROR_ON_UNDEFINED_SYMBOLS=0 -s ASYNCIFY -s 
+  -s NO_EXIT_RUNTIME=1 -s ERROR_ON_UNDEFINED_SYMBOLS=0 -s ASYNCIFY -s \
+  -s EXTRA_EXPORTED_RUNTIME_METHODS=['UTF8ToString']
 
 # Comment out all dlopen callbacks
 sed -i '/To use dlopen/s/^/\/\//' out/index.js 
