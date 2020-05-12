@@ -7,25 +7,24 @@ functions="emscripten_sleep set_square_pos startup"
 functions=`echo $functions | sed -e "s/ / -K /g" | sed 's/^/-K /'`
 echo $functions
 
-mkdir -p out
-
-build_version="debug"
-
 build_dir=tmp/build
-mkdir -p $build_dir
+mkdir -p out $build_dir
 
-build_path=$build_dir/build.c
-echo $build_path
+build_c=$build_dir/build.c
 
-cobc $functions -C -x -free cob/*.cob -o $build_path
+cobc $functions -C -x -free cob/*.cob -o $build_c
 
-echo $build_path
-
-emcc -O1 -o out/index.js $build_path c/*.c \
-  /root/opt/lib/*.a -I/root/opt/include \
+emcc \
+  $build_c \
+  c/extern.c \
+  /root/opt/lib/*.a \
+  -I/root/opt/include \
   -I/tools/cobol/gnucobol-3.0-rc1 \
-  -s ERROR_ON_UNDEFINED_SYMBOLS=0 -s ASYNCIFY \
-  -s EXTRA_EXPORTED_RUNTIME_METHODS=['UTF8ToString']
+  -s ERROR_ON_UNDEFINED_SYMBOLS=0 \
+  -s ASYNCIFY \
+  -s EXTRA_EXPORTED_RUNTIME_METHODS=['UTF8ToString'] \
+  -O1 \
+  -o out/index.js 
 
 # Comment out all dlopen callbacks
 sed -i '/To use dlopen/s/^/\/\//' out/index.js 

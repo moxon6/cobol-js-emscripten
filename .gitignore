@@ -1,3 +1,4 @@
 out/index.wasm
 out/index.js
 tmp
+node_modules

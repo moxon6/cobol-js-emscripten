@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/moxon6/cobol-js-emscripten/issues"
   },
-  "homepage": "https://github.com/moxon6/cobol-js-emscripten#readme"
+  "homepage": "https://github.com/moxon6/cobol-js-emscripten#readme",
+  "dependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
 }
