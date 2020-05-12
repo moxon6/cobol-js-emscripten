@@ -9,6 +9,7 @@
        01 Done PIC 9 VALUE 0.
        PROCEDURE DIVISION.
        Main.
+           DISPLAY "Starting up"
            CALL "startup" RETURNING OMITTED
            Perform Main-Loop UNTIL Done=1
            DISPLAY "Game Over"
