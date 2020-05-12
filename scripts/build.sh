@@ -30,7 +30,7 @@ emcc \
   -s ASYNCIFY \
   -s EXTRA_EXPORTED_RUNTIME_METHODS=['UTF8ToString'] \
   --minify 0 `# Disable JS minify - This allows the sed commands to below operate correctly` \
-  -O3 \
+  -O2 \
   -o $build_js 
 
 # Comment out all dlopen callbacks
