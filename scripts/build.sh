@@ -2,36 +2,22 @@
 
 set -e
 
-functions=$(cproto -I/emsdk_portable/upstream/emscripten/system/include /workspaces/cobol-js-emscripten/c/*.c  \
-  | grep -v "/\*"  \
-  | sed '/const /d' \
-  | cut -d' ' -f2  \
-  | cut -d '(' -f1)
-
-
-functions=`echo $functions | sed -e "s/ / -K /g"  | sed 's/^/-K /'`
+# Add list of functions defined in extern.c
+functions="emscripten_sleep set_square_pos startup"
+functions=`echo $functions | sed -e "s/ / -K /g" | sed 's/^/-K /'`
 echo $functions
 
-# Create output directory
 mkdir -p out
 
-rm -rf out/*.js
-rm -rf out/*.wasm
+build_version="debug"
 
-mkdir -p tmp
-
-# build_num=`find tmp/* -maxdepth 0 -type d | wc -l`
-build_num="2"
-
-echo "COBOL -> JS - Build version: $build_num"
-
-build_dir=tmp/build-$build_num
+build_dir=tmp/build
 mkdir -p $build_dir
 
 build_path=$build_dir/build.c
 echo $build_path
 
-cobc -K emscripten_sleep -K set_square_pos -K startup $functions -C -x -free cob/*.cob -o $build_path
+cobc $functions -C -x -free cob/*.cob -o $build_path
 
 echo $build_path
 
