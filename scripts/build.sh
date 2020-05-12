@@ -16,9 +16,12 @@ functions="-K emscripten_sleep -K set_square_pos  -K startup"
 build_c=$build_c_dir/build.c
 build_js=$build_js_dir/index.js
 
-# Compile COBOL to C using GNUCOBOL
+echo ""
+echo ">>> Transpiling COBOL -> C ..."
 cobc $functions -C -x -free cob/*.cob -o $build_c
 
+echo ">>> Compiling C -> WASM + JS ..."
+tput setaf 3 # Set font to yellow
 emcc \
   $build_c \
   c/extern.c \
@@ -32,10 +35,12 @@ emcc \
   --minify 0 `# Disable JS minify - This allows the sed commands to below operate correctly` \
   -O2 \
   -o $build_js 
+tput sgr 0  # Reset font color
 
-# Comment out all dlopen callbacks
+echo ">>> Commenting out all dlopen JS callbacks"
 sed -i '/To use dlopen/s/^/\/\//' $build_js
 
-# Comment out calling stub callbacks
+echo ">>> Commenting out all stub JS callbacks"
 sed -i '/Calling stub instead/s/^/\/\//' $build_js
-echo "Build Complete"
+
+echo "$(tput setaf 2)>>> Build Complete!$(tput sgr 0)"
