@@ -22,14 +22,15 @@ cobc $functions -C -x -free cob/*.cob -o $build_c
 emcc \
   $build_c \
   c/extern.c \
-  /root/opt/lib/libgmp.a `#Include Gnu multiprecision library llvm build` \
-  /root/opt/lib/libcob.a `#Link in gnucobol's libcob llvm build` \
+  /root/opt/lib/libgmp.a `# Include Gnu multiprecision library llvm build` \
+  /root/opt/lib/libcob.a `# Link in gnucobol's libcob llvm build` \
   -L/usr/local/include \
   -I/usr/local/include \
   -s ERROR_ON_UNDEFINED_SYMBOLS=0 \
   -s ASYNCIFY \
   -s EXTRA_EXPORTED_RUNTIME_METHODS=['UTF8ToString'] \
-  -O1 \
+  --minify 0 `# Disable JS minify - This allows the sed commands to below operate correctly` \
+  -O3 \
   -o $build_js 
 
 # Comment out all dlopen callbacks
