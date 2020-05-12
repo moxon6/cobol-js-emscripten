@@ -1,4 +1,3 @@
-out/index.wasm
-out/index.js
+app/cobol-js
 tmp
 node_modules

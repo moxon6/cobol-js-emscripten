@@ -2,33 +2,39 @@
 
 set -e
 
-# Add list of functions defined in extern.c
-functions="emscripten_sleep set_square_pos startup"
-functions=`echo $functions | sed -e "s/ / -K /g" | sed 's/^/-K /'`
-echo $functions
+# Define C intermediate and js/wasm output dirs
+build_c_dir=tmp/build
+build_js_dir=app/cobol-js/
 
-build_dir=tmp/build
-mkdir -p out $build_dir
+# Create these directories if they don't exist
+mkdir -p $build_js_dir $build_c_dir
 
-build_c=$build_dir/build.c
+# Define list of functions to expose from c/extern.c
+functions="-K emscripten_sleep -K set_square_pos  -K startup"
 
+# Define C intermediate and js output paths
+build_c=$build_c_dir/build.c
+build_js=$build_js_dir/index.js
+
+# Compile COBOL to C using GNUCOBOL
 cobc $functions -C -x -free cob/*.cob -o $build_c
 
 emcc \
   $build_c \
   c/extern.c \
-  /root/opt/lib/*.a \
-  -I/root/opt/include \
-  -I/tools/cobol/gnucobol-3.0-rc1 \
+  /root/opt/lib/libgmp.a `#Include Gnu multiprecision library llvm build` \
+  /root/opt/lib/libcob.a `#Link in gnucobol's libcob llvm build` \
+  -L/usr/local/include \
+  -I/usr/local/include \
   -s ERROR_ON_UNDEFINED_SYMBOLS=0 \
   -s ASYNCIFY \
   -s EXTRA_EXPORTED_RUNTIME_METHODS=['UTF8ToString'] \
   -O1 \
-  -o out/index.js 
+  -o $build_js 
 
 # Comment out all dlopen callbacks
-sed -i '/To use dlopen/s/^/\/\//' out/index.js 
+sed -i '/To use dlopen/s/^/\/\//' $build_js
 
 # Comment out calling stub callbacks
-sed -i '/Calling stub instead/s/^/\/\//' out/index.js
+sed -i '/Calling stub instead/s/^/\/\//' $build_js
 echo "Build Complete"
