@@ -20,9 +20,9 @@
       var Module = {
         preRun: [],
         postRun: [],
-        print: console.log,
-        printErr: console.error,
-        setStatus: console.log,
+        print: console.log.bind(console),
+        printErr: console.error.bind(console),
+        setStatus: console.log.bind(console),
         totalDependencies: 0,
         monitorRunDependencies: function(left) {
           this.totalDependencies = Math.max(this.totalDependencies, left);

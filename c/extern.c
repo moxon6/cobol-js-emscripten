@@ -1,6 +1,13 @@
 #include <emscripten.h>
+#include <stdio.h>
 
-EM_JS(int, set_asyncify_stack_size, (), {
+EM_JS(void, set_square_pos, (char* selectorPtr, char* leftPositionPtr), {
+    const selector = Module.UTF8ToString(selectorPtr);
+    const leftPosition = Module.UTF8ToString(leftPositionPtr);
+    document.querySelector(selector).style.left = leftPosition + "px";
+});
+
+EM_JS(void, startup, (), {
   Asyncify.StackSize = 512 * 1024;
   Module.quit = () => null;
   window.onkeydown = e => {
@@ -18,7 +25,3 @@ EM_JS(int, set_asyncify_stack_size, (), {
     }
   }
 });
-
-int startup() {
-    return set_asyncify_stack_size();
-}
