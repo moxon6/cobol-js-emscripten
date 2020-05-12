@@ -18,7 +18,7 @@
        Main-Loop.
        ACCEPT LastPressed.
        EVALUATE LastPressed
-           WHEN "ArrowLeft" 
+           WHEN "ArrowLeft"
                 SUBTRACT 25 FROM XPos
            WHEN "ArrowRight"
                 ADD 25 TO XPos

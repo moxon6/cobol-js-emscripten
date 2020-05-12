@@ -9,10 +9,8 @@ EM_JS(void, set_square_pos, (char* selectorPtr, char* leftPositionPtr), {
 
 EM_JS(void, startup, (), {
   Asyncify.StackSize = 512 * 1024;
-  Module.quit = () => null;
-  window.onkeydown = e => {
-    window.lastPressed = e.code;
-  };
+  window.onkeydown = e => window.lastPressed = e.code;
+  
   window.prompt = () => { 
      
     if(!window.hasEntered) { 
