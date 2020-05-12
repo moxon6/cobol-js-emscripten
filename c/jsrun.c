@@ -6,9 +6,10 @@ int js_run(char *script) {
     return 0;
 }
 
-EM_JS(void, set_square_pos, (char* selectorPtr), {
+EM_JS(void, set_square_pos, (char* selectorPtr, char* leftPositionPtr), {
     const selector = Module.UTF8ToString(selectorPtr);
-    document.querySelector(selector).style.left = window.lastPressed + "px";
+    const leftPosition = Module.UTF8ToString(leftPositionPtr);
+    document.querySelector(selector).style.left = leftPosition + "px";
 });
 
 int js_run_async(char *script) {

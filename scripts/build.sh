@@ -15,7 +15,6 @@ echo $functions
 # Create output directory
 mkdir -p out
 
-rm -rf out/*.js
 rm -rf out/*.wasm
 
 mkdir -p tmp
@@ -41,8 +40,6 @@ emcc -O0 --ignore-dynamic-linking -o out/index.js $build_path c/*.c \
   -s NO_EXIT_RUNTIME=1 -s ERROR_ON_UNDEFINED_SYMBOLS=0 -s ASYNCIFY -s \
   -s EXTRA_EXPORTED_RUNTIME_METHODS=['UTF8ToString']
 
-# Comment out all dlopen callbacks
-sed -i '/To use dlopen/s/^/\/\//' out/index.js 
 
 # Comment out calling stub callbacks
 sed -i '/Calling stub instead/s/^/\/\//' out/index.js
