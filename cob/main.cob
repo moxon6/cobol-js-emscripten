@@ -46,7 +46,6 @@
 
        Main-Loop.
        ADD 1 to Iteration.
-       DISPLAY Ball_Position_X.
 
        ADD Ball_Velocity_X to Ball_Position_X_Num.
        IF Ball_Position_X_Num EQUALS (GameWidth - PaddleWidth - Ball_Width) OR Ball_Position_X_Num EQUALS PaddleWidth
