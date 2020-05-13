@@ -7,7 +7,8 @@
     "build": "./scripts/build.sh",
     "watch": "find c cob scripts -type f | entr ./scripts/build.sh",
     "start": "cd app && python2 -m SimpleHTTPServer 5500",
-    "clean": "rm -rf tmp"
+    "clean": "rm -rf tmp",
+    "deploy": "gh-pages -d app"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/moxon6/cobol-js-emscripten#readme",
   "dependencies": {
+    "gh-pages": "^2.2.0",
     "parcel-bundler": "^1.12.4"
   }
 }
