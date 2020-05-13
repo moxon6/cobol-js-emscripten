@@ -9,7 +9,7 @@ const getKeysDown = () => Object.keys(keysDown)
 
 // Alternates between evaluating the input function and returning null
 const alternator = {
-    sendFunction: true,
+    shoudEvaluateFunction: true,
     handle (fn, shoudEvaluateFunction = this.shoudEvaluateFunction) {
         this.shoudEvaluateFunction = !shoudEvaluateFunction;
         return shoudEvaluateFunction ? fn() : null;
