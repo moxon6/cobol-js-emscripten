@@ -10,9 +10,9 @@ const getKeysDown = () => Object.keys(keysDown)
 // Alternates between evaluating the input function and returning null
 const alternator = {
     sendFunction: true,
-    handle (fn, sendFunction = this.sendFunction) {
-        this.sendFunction = !sendFunction;
-        return sendFunction ? fn() : null;
+    handle (fn, shoudEvaluateFunction = this.shoudEvaluateFunction) {
+        this.shoudEvaluateFunction = !shoudEvaluateFunction;
+        return shoudEvaluateFunction ? fn() : null;
     }    
 }
 
@@ -24,9 +24,9 @@ window.prompt = () => alternator.handle(() => {
     return unhandled.shift();
 });
 
-function setElementProperty(selector, styleProp, styleValue) {
-    const { style } = document.querySelector(selector);
-    if (style[styleProp] !== styleValue) {
-        style[styleProp] = styleValue;
+function setElementProperty(selector, prop, value) {
+    const element = document.querySelector(selector);
+    if (_.get(element, prop) !== value) {
+        _.set(element, prop, value)
     }
 }

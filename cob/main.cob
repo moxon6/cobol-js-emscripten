@@ -7,12 +7,14 @@
        01 LastPressed     PIC X(40).
        01 Player1.
            05 Player1_Position.
-               10 Player1_Num PIC 999 VALUE 0.
+               10 Player1_Num PIC 999 VALUE 20.
                10 Player1_Pixels PIC X(3) VALUE z"px".
+           05 Player1_Score PIC 99 VALUE 0.
        01 Player2.
            05 Player2_Position.
                10 Player2_Num PIC 999 VALUE 0.
                10 Player2_Pixels PIC X(3) VALUE z"px".
+           05 Player2_Score PIC 99 VALUE 0.
        01 Ball.
            05 Ball_Position.
                10 Ball_Position_X.
@@ -36,8 +38,8 @@
        PROCEDURE DIVISION.
        Main.
            CALL "startup" RETURNING OMITTED
-           CALL "set_element_property" using ".loading-message" "display" "None".
-           CALL "set_element_property" using ".score" "display" "block".
+           CALL "set_element_property" using ".loading-message" "style.display" "None".
+           CALL "set_element_property" using ".score" "style.display" "block".
            Perform Main-Loop UNTIL Done=1
            DISPLAY "Game Over"
            STOP RUN.
@@ -48,17 +50,11 @@
 
        ADD Ball_Velocity_X to Ball_Position_X_Num.
        IF Ball_Position_X_Num EQUALS (GameWidth - PaddleWidth - Ball_Width) OR Ball_Position_X_Num EQUALS PaddleWidth
-           COMPUTE Ball_Velocity_X = Ball_Velocity_X * -1.
-           
-       Perform Handle-Keypress TEST AFTER UNTIL LastPressed = SPACE .
-
-       *> CALL "set_element_property" using ".ball" "top" Ball_Position_Y.
-       CALL "set_element_property" using ".ball" "left" Ball_Position_X.
-
-       CALL "set_element_property" using ".paddle-1" "top" Player1_Position.
-       CALL "set_element_property" using ".paddle-2" "top" Player2.
-       CALL "emscripten_sleep" using by value 5 RETURNING OMITTED
-       .
+           COMPUTE Ball_Velocity_X = Ball_Velocity_X * -1
+           ADD 1 to Player1_Score
+           Perform Update-Scores.
+       Perform Handle-Keypress TEST AFTER UNTIL LastPressed = SPACE.
+       Perform Update-Positions.
 
        Handle-KeyPress.
        ACCEPT LastPressed.
@@ -76,8 +72,17 @@
                IF Player2_Num IS LESS THAN GameHeight - PaddleHeight
                    ADD PaddleSpeed TO Player2_Num
            WHEN "Escape"
-               MOVE 1 TO DONE
-       .
+               MOVE 1 TO DONE.
+
+       Update-Positions.
+       CALL "set_element_property" using ".ball" "style.left" Ball_Position_X.
+       CALL "set_element_property" using ".paddle-1" "style.top" Player1_Position.
+       CALL "set_element_property" using ".paddle-2" "style.top" Player2.
+       CALL "emscripten_sleep" using by value 5 RETURNING OMITTED.
       
+       Update-Scores.
+       CALL "set_element_property" using ".player-1-score" "innerHTML" Player1_Score.
+       CALL "set_element_property" using ".player-2-score" "innerHTML" Player2_Score.
+
        END PROGRAM MainProgram.
 
