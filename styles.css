@@ -1,0 +1,80 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.pong-container {
+  
+  width: 502px;
+  height: 502px;
+  background-color: black;
+  border: 1px solid black;
+}
+
+.pong {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.loading-message {
+  position: absolute;
+  color: white;
+  text-transform: uppercase;
+  font-family: monospace;
+}
+
+.score {
+  display: none;
+  position: absolute;
+  color: white;
+  font-family: monospace;
+  font-size: x-large;
+}
+
+.paddle-1 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 10px;
+  height: 100px;
+  background-color: white;
+}
+
+.paddle-2 {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 10px;
+  height: 100px;
+  background-color: white;
+}
+
+.center-line {
+  position: absolute;
+  width: 1px;
+  background-color: white;
+  height: 100%;
+}
+
+.ball {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  left: 240px;
+  top: 240px;
+  position: absolute;
+}
+
+.main-content {
+  background-color: #2d3c37;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

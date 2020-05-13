@@ -1,0 +1,38 @@
+/* Based on https://codepen.io/somethingformed/pen/raWJXV */
+
+.terminal-frame {
+  position: relative;
+  font-family: VT323;
+  color: #14fdce;
+  font-size: 24px;
+  background-color: #031e11;
+  height: 100%;
+  width: 100%;
+}
+
+.terminal-fragment {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.terminal-fragment-output {
+  text-shadow: 0 0.2rem 1rem #0c7b46;
+}
+
+.terminal-fragment-scanlines {
+  background: linear-gradient( to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.2) 70%, rgba(0, 0, 0, 0.6));
+  background-size: 100% 0.3rem;
+}
+
+.terminal-fragment-glow {
+  background: radial-gradient( circle at center, #1bd459 0, rgba(27, 212, 89, 0.88) 63%, rgba(21, 235, 92, 0.57) 85%, rgba(19, 94, 29, 0.27) 98%, rgba(10, 23, 12, 0) 100%);
+  opacity: 0.20;
+}
+
+@font-face {
+  font-family: VT323;
+  src: url(https://fonts.gstatic.com/s/vt323/v11/pxiKyp0ihIEF2isfFJA.ttf);
+}
