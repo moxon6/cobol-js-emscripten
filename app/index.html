@@ -1,78 +1,22 @@
 <html>
   <head>
-    <title>CobolJS</title>
+    <title>Cobol-Pong</title>
   </head>
   <body>
-    <style>
-      .pong-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 500px;
-        height: 500px;
-        background-color: black;
-        position: relative;
-        border: 1px solid black;
-      }
-
-      .loading-message {
-        position: absolute;
-        color: white;
-        text-transform: uppercase;
-        font-family: monospace;
-      }
-
-      .paddle-1 {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 10px;
-        height: 100px;
-        background-color: white;
-      }
-
-      .paddle-2 {
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 10px;
-        height: 100px;
-        background-color: white;
-      }
-
-
-
-    </style>
-
+    <link rel="stylesheet" href="./styles.css">
     <div class="pong-container">
-      <div class="player-1-score">
+      <div class="score">
           <span class="player-1-score">5</span>
-          -
+          <span>-</span>
           <span class="player-2-score">4</span>
       </div>
-
+      <div class="center-line"></div>
       <div class="paddle-1"></div>
       <div class="paddle-2"></div>
-
       <div class="loading-message">Loading...</div>
-      
     </div>
    
-    <script type='text/javascript'>
-
-      var Module = {
-        preRun: [],
-        postRun: [],
-        print: console.log.bind(console),
-        printErr: console.error.bind(console),
-        setStatus: console.log.bind(console),
-        totalDependencies: 0,
-        monitorRunDependencies: function(left) {
-          this.totalDependencies = Math.max(this.totalDependencies, left);
-          console.log(left ? 'Preparing... (' + (this.totalDependencies-left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
-        }
-      };
-    </script>
+    <script type='text/javascript' src="handle-keys.js"></script>
     <script async type="text/javascript" src="cobol-js/index.js"></script>
   </body>
 </html>

@@ -14,17 +14,4 @@ EM_JS(void, set_element_property, (char* selectorPtr, char* stylePropPtr, char* 
 
 EM_JS(void, startup, (), {
   Asyncify.StackSize = 512 * 1024;
-  window.onkeydown = e => window.lastPressed = e.code;
-  
-  window.prompt = () => { 
-     
-    if(!window.hasEntered) { 
-      window.hasEntered = true;
-      return window.lastPressed;
-    } else { 
-      window.hasEntered = false; 
-      window.lastPressed = "";
-      return null; 
-    }
-  }
-});
+  });

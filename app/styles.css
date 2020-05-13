@@ -1,0 +1,50 @@
+.pong-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 500px;
+    background-color: black;
+    position: relative;
+    border: 1px solid black;
+  }
+
+  .loading-message {
+    position: absolute;
+    color: white;
+    text-transform: uppercase;
+    font-family: monospace;
+  }
+
+  .score {
+    display: none;
+    position: absolute;
+    color: white;
+    font-family: monospace;
+    font-size: x-large;
+  }
+
+  .paddle-1 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 10px;
+    height: 100px;
+    background-color: white;
+  }
+
+  .paddle-2 {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 10px;
+    height: 100px;
+    background-color: white;
+  }
+
+  .center-line {
+    position: absolute;
+    width: 1px;
+    background-color: white;
+    height: 100%;
+  }
