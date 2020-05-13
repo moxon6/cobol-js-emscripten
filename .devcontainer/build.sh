@@ -1,4 +1,9 @@
+set -e 
+
 cd "$(dirname "$0")"
+
+# Fetch dependencies
+./fetch-dependencies.sh
 
 # Build and install GnuCobol and dependencies first
 ./gmp.build.sh
