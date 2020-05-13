@@ -4,7 +4,7 @@
        ENVIRONMENT DIVISION.
        DATA DIVISION.
        WORKING-STORAGE SECTION.
-       01 LastPressed     PIC X(40).
+       01 LastPressed PIC X(40).
        01 Player1.
            05 Player1_Position.
                10 Player1_Num PIC 999 VALUE 20.
@@ -50,11 +50,11 @@
 
        ADD Ball_Velocity_X to Ball_Position_X_Num.
        IF Ball_Position_X_Num EQUALS (GameWidth - PaddleWidth - Ball_Width) OR Ball_Position_X_Num EQUALS PaddleWidth
-           COMPUTE Ball_Velocity_X = Ball_Velocity_X * -1
-           ADD 1 to Player1_Score
-           Perform Update-Scores.
-       Perform Handle-Keypress TEST AFTER UNTIL LastPressed = SPACE.
-       Perform Update-Positions.
+           MULTIPLY -1 BY Ball_Velocity_X
+           ADD 1 to Player1_Score.
+           
+       Perform Handle-Keypress TEST AFTER UNTIL LastPressed EQUALS SPACE.
+       Perform Rerender.
 
        Handle-KeyPress.
        ACCEPT LastPressed.
@@ -73,6 +73,10 @@
                    ADD PaddleSpeed TO Player2_Num
            WHEN "Escape"
                MOVE 1 TO DONE.
+
+       Rerender.
+       Perform Update-Positions.
+       Perform Update-Scores.
 
        Update-Positions.
        CALL "set_element_property" using ".ball" "style.left" Ball_Position_X.
