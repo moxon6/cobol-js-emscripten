@@ -7,4 +7,4 @@ EM_JS(void, set_element_property, (char* selectorPtr, char* stylePropPtr, char* 
 
 EM_JS(void, startup, (), {
   Asyncify.StackSize = 512 * 1024;
-  });
+});

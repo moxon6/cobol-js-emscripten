@@ -49,15 +49,15 @@
            CALL "set_element_property" using ".loading-message" "style.display" "None".
 
            Perform Main-Loop UNTIL Done=1
-           DISPLAY "Game Over"
+           CALL "set_element_property" using ".loading-message" "style.display" "block".
+           CALL "set_element_property" using ".loading-message" "innerHTML" "GAME OVER".
            STOP RUN.
     
        Initialise-UI.
-           CALL "set_element_property" using ".paddle-1" "style.height" PaddleHeight
-           CALL "set_element_property" using ".paddle-2" "style.height" PaddleHeight
-           CALL "set_element_property" using ".ball" "style.display" "block"
-           COMPUTE Ball_Position_X_Num = GameWidth / 2 + Ball_Width / 2
-           COMPUTE Ball_Position_Y_Num = GameHeight / 2 + Ball_Width / 2
+           CALL "set_element_property" using ".paddle-1" "style.height" PaddleHeight.
+           CALL "set_element_property" using ".paddle-2" "style.height" PaddleHeight.
+           CALL "set_element_property" using ".ball" "style.display" "block".
+           Perform Reset-Game.
        .
         
        Check-Game-Start.
@@ -127,8 +127,10 @@
                MOVE 1 TO DONE.
 
        Reset-Game.
-           MOVE 240 TO Ball_Position_X_Num.
-           MOVE 240 TO Ball_Position_Y_Num.
+           COMPUTE Ball_Position_X_Num = GameWidth / 2 - Ball_Width / 2
+           COMPUTE Ball_Position_Y_Num = GameHeight / 2 - Ball_Width / 2
+       .
+
 
        Rerender.
        Perform Update-Positions.
