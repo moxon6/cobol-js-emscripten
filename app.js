@@ -24,7 +24,7 @@ window.prompt = () => alternator.handle(() => {
     return unhandled.shift();
 });
 
-function setElementProperty(selector, prop, value) {
+function _setElementProperty(selector, prop, value) {
     const element = document.querySelector(selector);
     
     let obj = element

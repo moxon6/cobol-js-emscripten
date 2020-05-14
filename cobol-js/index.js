@@ -390,8 +390,8 @@ function setValue(ptr, value, type, noSafe) {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 46,
- "maximum": 46 + 0,
+ "initial": 42,
+ "maximum": 42 + 0,
  "element": "anyfunc"
 });
 
@@ -657,7 +657,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_BASE = 5271936, DYNAMIC_BASE = 5271936, DYNAMICTOP_PTR = 28896;
+var STACK_BASE = 5271632, DYNAMIC_BASE = 5271632, DYNAMICTOP_PTR = 28592;
 
 var INITIAL_INITIAL_MEMORY = Module["INITIAL_MEMORY"] || 16777216;
 
@@ -918,12 +918,12 @@ var tempDouble;
 
 var tempI64;
 
-function startup() {
- Asyncify.StackSize = 512 * 1024;
+function setElementProperty(selectorPtr, stylePropPtr, styleValuePtr) {
+ _setElementProperty(...[ ...arguments ].map(x => Module.UTF8ToString(x)));
 }
 
-function set_element_property(selectorPtr, stylePropPtr, styleValuePtr) {
- setElementProperty(...[ ...arguments ].map(x => Module.UTF8ToString(x)));
+function startup() {
+ Asyncify.StackSize = 512 * 1024;
 }
 
 __ATINIT__.push({
@@ -3391,15 +3391,6 @@ var SYSCALLS = {
  }
 };
 
-function ___syscall114(pid, wstart, options, rusage) {
- try {
-  abort("cannot wait on child processes");
- } catch (e) {
-  if (typeof FS === "undefined" || !(e instanceof FS.ErrnoError)) abort(e);
-  return -e.errno;
- }
-}
-
 function ___syscall148(fd) {
  try {
   var stream = SYSCALLS.getStreamFromFD(fd);
@@ -3646,7 +3637,7 @@ function _emscripten_get_heap_size() {
 }
 
 function _emscripten_get_sbrk_ptr() {
- return 28896;
+ return 28592;
 }
 
 function _emscripten_memcpy_big(dest, src, num) {
@@ -3790,9 +3781,9 @@ function _fd_write(fd, iov, iovcnt, pnum) {
  }
 }
 
-var ___tm_current = 28912;
+var ___tm_current = 28608;
 
-var ___tm_timezone = (stringToUTF8("GMT", 28960, 4), 28960);
+var ___tm_timezone = (stringToUTF8("GMT", 28656, 4), 28656);
 
 function _tzset() {
  if (_tzset.called) return;
@@ -3866,11 +3857,6 @@ function _mktime(tmPtr) {
  var yday = (date.getTime() - start.getTime()) / (1e3 * 60 * 60 * 24) | 0;
  HEAP32[tmPtr + 28 >> 2] = yday;
  return date.getTime() / 1e3 | 0;
-}
-
-function _popen() {
- err("missing function: popen");
- abort(-1);
 }
 
 var ERRNO_CODES = {
@@ -4989,7 +4975,6 @@ function intArrayFromString(stringy, dontAddNull, length) {
 
 var asmLibraryArg = {
  "__map_file": ___map_file,
- "__syscall114": ___syscall114,
  "__syscall148": ___syscall148,
  "__syscall195": ___syscall195,
  "__syscall197": ___syscall197,
@@ -5019,10 +5004,9 @@ var asmLibraryArg = {
  "localtime": _localtime,
  "memory": wasmMemory,
  "mktime": _mktime,
- "popen": _popen,
  "raise": _raise,
+ "setElementProperty": setElementProperty,
  "setTempRet0": _setTempRet0,
- "set_element_property": set_element_property,
  "sigaction": _sigaction,
  "sigemptyset": _sigemptyset,
  "startup": startup,
