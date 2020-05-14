@@ -29,7 +29,7 @@
            05 Ball_Width PIC 99 VALUE 20.
                
        01 GameHeight PIC 999 VALUE 500.
-       01 GameWidth PIC 999 VALUE 500.
+       01 GameWidth PIC 999 VALUE 800.
        01 PaddleWidth PIC 999 VALUE 10.
        01 PaddleHeight PIC 999 VALUE 100.
        01 Started PIC 9 VALUE 0.
