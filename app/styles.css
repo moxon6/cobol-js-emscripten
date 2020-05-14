@@ -26,6 +26,7 @@ body {
   color: white;
   text-transform: uppercase;
   font-family: monospace;
+  align-self: start;
 }
 
 .score {
