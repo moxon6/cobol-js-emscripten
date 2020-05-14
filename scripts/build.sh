@@ -10,7 +10,7 @@ build_js_dir=app/cobol-js/
 mkdir -p $build_js_dir $build_c_dir
 
 # Define list of functions to expose from c/extern.c
-functions="-K emscripten_sleep -K set_element_property  -K startup"
+functions="-K emscripten_sleep -K setElementProperty  -K startup"
 
 # Define C intermediate and js output paths
 build_c=$build_c_dir/build.c
