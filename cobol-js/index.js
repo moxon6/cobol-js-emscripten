@@ -657,7 +657,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_BASE = 5271632, DYNAMIC_BASE = 5271632, DYNAMICTOP_PTR = 28592;
+var STACK_BASE = 5271664, DYNAMIC_BASE = 5271664, DYNAMICTOP_PTR = 28624;
 
 var INITIAL_INITIAL_MEMORY = Module["INITIAL_MEMORY"] || 16777216;
 
@@ -3637,7 +3637,7 @@ function _emscripten_get_heap_size() {
 }
 
 function _emscripten_get_sbrk_ptr() {
- return 28592;
+ return 28624;
 }
 
 function _emscripten_memcpy_big(dest, src, num) {
@@ -3781,9 +3781,9 @@ function _fd_write(fd, iov, iovcnt, pnum) {
  }
 }
 
-var ___tm_current = 28608;
+var ___tm_current = 28640;
 
-var ___tm_timezone = (stringToUTF8("GMT", 28656, 4), 28656);
+var ___tm_timezone = (stringToUTF8("GMT", 28688, 4), 28688);
 
 function _tzset() {
  if (_tzset.called) return;
