@@ -18,10 +18,10 @@
        01 Ball.
            05 Ball_Position.
                10 Ball_Position_X.
-                   15 Ball_Position_X_Num PIC 999 VALUE 240.
+                   15 Ball_Position_X_Num PIC 999 VALUE 0.
                    15 Ball_Position_X_Pixels PIC X(3) VALUE z"px".
                10 Ball_Position_Y.
-                   15 Ball_Position_Y_Num PIC 999 VALUE 240.
+                   15 Ball_Position_Y_Num PIC 999 VALUE 0.
                    15 Ball_Position_Y_Pixels PIC X(3) VALUE z"px".
            05 Ball_Velocity.
                10 Ball_Velocity_X PIC S99 VALUE 2.
@@ -31,7 +31,9 @@
        01 GameHeight PIC 999 VALUE 500.
        01 GameWidth PIC 999 VALUE 800.
        01 PaddleWidth PIC 999 VALUE 10.
-       01 PaddleHeight PIC 999 VALUE 100.
+       01 PaddleHeight.
+           05 PaddleHeight_Num PIC 999 VALUE 75.
+           05 PaddleHeight_Pixels PIC X(3) VALUE z"px".
        01 Started PIC 9 VALUE 0.
        01 Done PIC 9 VALUE 0.
        01 PaddleSpeed PIC 99 VALUE 5.
@@ -43,17 +45,25 @@
            CALL "set_element_property" using ".score" "style.display" "block".
 
            Perform Check-Game-Start UNTIL Started=1
+           Perform Initialise-UI.       
            CALL "set_element_property" using ".loading-message" "style.display" "None".
-       
 
            Perform Main-Loop UNTIL Done=1
            DISPLAY "Game Over"
            STOP RUN.
+    
+       Initialise-UI.
+           CALL "set_element_property" using ".paddle-1" "style.height" PaddleHeight
+           CALL "set_element_property" using ".paddle-2" "style.height" PaddleHeight
+           CALL "set_element_property" using ".ball" "style.display" "block"
+           COMPUTE Ball_Position_X_Num = GameWidth / 2 + Ball_Width / 2
+           COMPUTE Ball_Position_Y_Num = GameHeight / 2 + Ball_Width / 2
+       .
         
        Check-Game-Start.
            ACCEPT LastPressed.
            IF LastPressed EQUALS SPACE
-               CALL "emscripten_sleep" using by value 250 RETURNING OMITTED
+               CALL "emscripten_sleep" using by value 10 RETURNING OMITTED
            ELSE
                MOVE 1 to Started
            END-IF
@@ -71,13 +81,13 @@
        END-IF
 
        IF Ball_Position_X_Num EQUALS PaddleWidth
-           IF Player1_Num - Ball_Width < (Ball_Position_Y_Num) AND Ball_Position_Y_Num < (Player1_Num + PaddleHeight + Ball_Width)
+           IF Player1_Num - Ball_Width < (Ball_Position_Y_Num) AND Ball_Position_Y_Num < (Player1_Num + PaddleHeight_Num + Ball_Width)
                MULTIPLY -1 BY Ball_Velocity_X
            END-IF
         END-IF
 
        IF Ball_Position_X_Num EQUALS (GameWidth - Ball_Width - PaddleWidth)
-           IF Player2_Num - Ball_Width < (Ball_Position_Y_Num) AND Ball_Position_Y_Num < (Player2_Num + PaddleHeight + Ball_Width)
+           IF Player2_Num - Ball_Width < (Ball_Position_Y_Num) AND Ball_Position_Y_Num < (Player2_Num + PaddleHeight_Num + Ball_Width)
                MULTIPLY -1 BY Ball_Velocity_X
            END-IF
         END-IF
@@ -105,13 +115,13 @@
                IF Player1_Num IS GREATER THAN OR EQUAL TO PaddleSpeed
                    SUBTRACT PaddleSpeed FROM Player1_Num
            WHEN "KeyD"
-               IF Player1_Num IS LESS THAN GameHeight - PaddleHeight
+               IF Player1_Num IS LESS THAN GameHeight - PaddleHeight_Num
                    ADD PaddleSpeed TO Player1_Num
            WHEN "KeyJ"
                IF Player2_Num IS GREATER THAN OR EQUAL TO PaddleSpeed
                    SUBTRACT PaddleSpeed FROM Player2_Num
            WHEN "KeyL"
-               IF Player2_Num IS LESS THAN GameHeight - PaddleHeight
+               IF Player2_Num IS LESS THAN GameHeight - PaddleHeight_Num
                    ADD PaddleSpeed TO Player2_Num
            WHEN "Escape"
                MOVE 1 TO DONE.
