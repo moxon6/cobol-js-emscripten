@@ -25,11 +25,6 @@ window.prompt = () => alternator.handle(() => {
 });
 
 function setElementProperty(selector, prop, value) {
-    
-    
-    if (selector === ".ball"){
-        console.log(selector, prop, value);
-    }
     const element = document.querySelector(selector);
     
     let obj = element
