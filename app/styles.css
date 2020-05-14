@@ -69,8 +69,18 @@ body {
 
 .main-content {
   padding-top: 20px;
+  padding-bottom: 20px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.controls {
+  margin-bottom: 0;
+  font-family: monospace;
+}
+
+.jumbotron {
+  padding: 20px !important;
 }
