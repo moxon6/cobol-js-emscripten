@@ -42,10 +42,9 @@
        Main.
            CALL "startup" RETURNING OMITTED
            CALL "setElementProperty" using ".loading-message" "innerHTML" "Press Any Key To Start".
-           CALL "setElementProperty" using ".score" "style.display" "block".
-
            Perform Check-Game-Start UNTIL Started=1
-           Perform Initialise-UI.       
+           Perform Initialise-UI.
+           CALL "setElementProperty" using ".score" "style.display" "block".
            CALL "setElementProperty" using ".loading-message" "style.display" "None".
 
            Perform Main-Loop UNTIL Done=1
@@ -94,17 +93,15 @@
 
        IF BallPositionXNum EQUALS 0
            MULTIPLY -1 BY BallVelocityX
-           Perform Reset-Game
-           ADD 1 to Player2Score.
+           ADD 1 to Player2Score
+           Perform Reset-Game.
                
 
        IF BallPositionXNum EQUALS (GameWidth - BallWidth)
            MULTIPLY -1 BY BallVelocityX
-           Perform Reset-Game
-           ADD 1 to Player1Score.
-       
-       
-           
+           ADD 1 to Player1Score
+           Perform Reset-Game.
+
        Perform Handle-Keypress TEST AFTER UNTIL LastPressed EQUALS SPACE.
        Perform Rerender.
 
@@ -129,6 +126,8 @@
        Reset-Game.
            COMPUTE BallPositionXNum = GameWidth / 2 - BallWidth / 2
            COMPUTE BallPositionYNum = GameHeight / 2 - BallWidth / 2
+           PERFORM Rerender.
+           CALL "emscripten_sleep" using by value 1000 RETURNING OMITTED
        .
 
 
