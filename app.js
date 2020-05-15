@@ -1,4 +1,4 @@
-let unhandled = [];
+let inputStream = []
 
 const keysDown = {};
 window.onkeydown = e => keysDown[e.code] = true;
@@ -7,22 +7,17 @@ window.onkeyup = e => keysDown[e.code] = false;
 const getKeysDown = () => Object.keys(keysDown)
     .filter(key => keysDown[key]);
 
-// Alternates between evaluating the input function and returning null
-const alternator = {
-    shoudEvaluateFunction: true,
-    handle (fn, shoudEvaluateFunction = this.shoudEvaluateFunction) {
-        this.shoudEvaluateFunction = !shoudEvaluateFunction;
-        return shoudEvaluateFunction ? fn() : null;
-    }    
-}
+// Final empty string denotes end of series of keys
+const mapKeysToNullTerminatedInputSequence = strings => ([...strings, ""])
+    .map(str => [str, null]) // Adding nulls to terminate strings going to stdin
+    .flat()
 
-window.prompt = () => alternator.handle(() => {
-    if (!unhandled.length) {
-        unhandled = getKeysDown();
-        return ""
-    }
-    return unhandled.shift();
-});
+const getInputStream = () => mapKeysToNullTerminatedInputSequence(getKeysDown())
+
+window.prompt = () => {
+    if (!inputStream.length) inputStream = getInputStream()
+    return inputStream.shift();
+}
 
 function _setElementProperty(selector, prop, value) {
     const element = document.querySelector(selector);
