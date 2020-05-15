@@ -1,43 +1,48 @@
 <html>
   <head>
-    <title>COBOL Pong</title> 
-    <link rel="stylesheet" href="./styles.css">
-    <link rel="stylesheet" href="./terminal.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
-    <script type='text/javascript' src="app.js"></script>
+    <title>COBOL Pong</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./terminal.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      crossorigin="anonymous"
+    />
+    <script type="text/javascript" src="app.js"></script>
   </head>
   <body class="container vsc-initialized">
     <div class="jumbotron">
       <h1 class="display-3">WebAssembly COBOL Pong</h1>
-      <p class="lead">Pong written in COBOL, compiled to WebAssembly. </p>
-      <p><a href="https://github.com/moxon6/cobol-js-emscripten">https://github.com/moxon6/cobol-js-emscripten</a></p>
-      <p class="controls">A/D to control player 1</p>
-      <p class="controls">J/L to control player 2</p>
+      <p class="lead">Pong written in COBOL, compiled to WebAssembly.</p>
+      <p>
+        <a href="https://github.com/moxon6/cobol-js-emscripten"
+          >https://github.com/moxon6/cobol-js-emscripten</a
+        >
+      </p>
+      <p class="controls">E/D to control player 1</p>
+      <p class="controls">I/J to control player 2</p>
       <p class="controls">Esc to end game</p>
     </div>
-    <div class="main-content">    
+    <div class="main-content">
       <div class="pong-container">
         <div class="terminal-frame">
           <div class="terminal-fragment terminal-fragment-output pong">
-              <div class="score">
-                  <span class="player-1-score">00</span>
-                  <span>-</span>
-                  <span class="player-2-score">00</span>
-              </div>
-              <div class="center-line"></div>
-              <div class="paddle-1"></div>
-              <div class="paddle-2"></div>
-              <div class="ball"></div>
-              <div class="loading-message">Loading...</div>
-            
+            <div class="score">
+              <span class="player-1-score">00</span>
+              <span>-</span>
+              <span class="player-2-score">00</span>
+            </div>
+            <div class="center-line"></div>
+            <div class="paddle-1"></div>
+            <div class="paddle-2"></div>
+            <div class="ball"></div>
+            <div class="loading-message">Loading...</div>
           </div>
           <div class="terminal-fragment terminal-fragment-scanlines"></div>
           <div class="terminal-fragment terminal-fragment-glow"></div>
         </div>
       </div>
-    </div>    
+    </div>
     <script async type="text/javascript" src="cobol-js/index.js"></script>
   </body>
 </html>
-
-
