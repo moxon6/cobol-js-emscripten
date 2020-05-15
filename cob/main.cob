@@ -114,10 +114,10 @@
            WHEN "KeyD"
                IF Player1Num IS LESS THAN GameHeight - PaddleHeightNum
                    ADD PaddleSpeed TO Player1Num
-           WHEN "KeyJ"
+           WHEN "KeyL"
                IF Player2Num IS GREATER THAN OR EQUAL TO PaddleSpeed
                    SUBTRACT PaddleSpeed FROM Player2Num
-           WHEN "KeyL"
+           WHEN "KeyJ"
                IF Player2Num IS LESS THAN GameHeight - PaddleHeightNum
                    ADD PaddleSpeed TO Player2Num
            WHEN "Escape"
