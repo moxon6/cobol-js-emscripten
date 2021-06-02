@@ -36,3 +36,12 @@ jobs:
         cd libcob
         emmake make INCLUDES=-I${HOME}/opt/include
         make install
+
+    - name: Release dependencies
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file_glob: ${HOME}/opt/**/*
+        tag: 1.0
+        overwrite: true
+        body: "Wasm library dependencies"
