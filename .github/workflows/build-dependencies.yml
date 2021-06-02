@@ -17,9 +17,9 @@ jobs:
         make
         make install
 
-    - name: Install gettext
+    - name: Install dependencies
       run: |
-        sudo apt-get install gettext
+        sudo apt-get install autopoint gettext
     
     - name: Build libcob wasm
       run: |
