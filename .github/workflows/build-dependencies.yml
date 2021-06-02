@@ -41,7 +41,8 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file_glob: ${HOME}/opt/**/*
+        file: ${HOME}/opt/**/*
+        file_glob: true
         tag: 1.0
         overwrite: true
         body: "Wasm library dependencies"
