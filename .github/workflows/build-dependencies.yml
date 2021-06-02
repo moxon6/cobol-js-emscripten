@@ -37,13 +37,11 @@ jobs:
         emmake make INCLUDES=-I${HOME}/opt/include
         make install
 
-        find ~/opt -exec echo {} \;
-
     - name: Release dependencies
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: ~/opt/**/*
+        file: /home/runner/opt/**/*
         file_glob: true
         tag: 1.0
         overwrite: true
