@@ -4,7 +4,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    steps:
     - uses: mymindstorm/setup-emsdk@v7
 
     - name: Build libgmp wasm
