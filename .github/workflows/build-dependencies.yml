@@ -41,7 +41,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: ${HOME}/opt/**/*
+        file: ~/opt/**/*
         file_glob: true
         tag: 1.0
         overwrite: true
