@@ -37,6 +37,8 @@ jobs:
         emmake make INCLUDES=-I${HOME}/opt/include
         make install
 
+        find ~/opt -exec echo {} \;
+
     - name: Release dependencies
       uses: svenstaro/upload-release-action@v2
       with:
