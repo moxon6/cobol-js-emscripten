@@ -1,0 +1,34 @@
+name: Build libcob and libgmp
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    - uses: mymindstorm/setup-emsdk@v7
+
+    - name: Build libgmp wasm
+      run: |
+        mkdir -p ${HOME}/opt
+        wget https://gmplib.org/download/gmp/gmp-6.1.2.tar.xz
+        tar xvf gmp-6.1.2.tar.xz
+        cd gmp-6.1.2
+        emconfigure ./configure --disable-assembly --host none --prefix=${HOME}/opt
+        make
+        make install
+    
+    - name: Build libcob wasm
+      run: |
+        mkdir -p ${HOME}/opt
+        wget http://sourceforge.net/projects/open-cobol/files/gnu-cobol/3.0/gnucobol-3.0-rc1.tar.gz
+        tar xvf gnucobol-3.0-rc1.tar.gz
+        cd gnucobol-3.0-rc1
+        sed -i '14680,14868d' configure # Delete GMP checks
+        sed -i '515,582d' configure.ac # Delete GMP checks
+
+        autoreconf -f -i
+        emconfigure ./configure --with-db=false --disable-assembly --prefix=${HOME}/opt --includedir=${HOME}/opt/include
+        make defaults.h
+        cd libcob
+        emmake make INCLUDES=-I${HOME}/opt/include
+        make install
