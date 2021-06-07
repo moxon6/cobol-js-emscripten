@@ -51,7 +51,7 @@ jobs:
         cd publish
         ar -x ${HOME}/opt/lib/libcob.a
         ar -x ${HOME}/opt/lib/libgmp.a
-        wasm-ld *.o -o libcob.so --relocatable --no-entry
+        ./emsdk/upstream/bin/wasm-ld *.o -o libcob.so --relocatable --no-entry
         rm *.a
         cp ./gnucobol-3.0-rc1/libcob.h .
 
