@@ -11,6 +11,8 @@ jobs:
         cd emsdk
         ./emsdk install latest
         ./emsdk activate latest
+        echo $(find .)
+        exit 1
 
     - name: Build libgmp wasm
       run: |
