@@ -5,7 +5,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: mymindstorm/setup-emsdk@v7
+    - name: "Setup Emscripten"
+      run: |
+        git clone https://github.com/emscripten-core/emsdk.git
+        cd emsdk
+        ./emsdk install latest
+        ./emsdk activate latest
 
     - name: Build libgmp wasm
       run: |
@@ -19,7 +24,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        sudo apt-get install autopoint gettext wabt llvm
+        sudo apt-get install autopoint gettext
     
     - name: Build libcob wasm
       run: |
@@ -39,6 +44,7 @@ jobs:
     
     - name: Combine libraries
       run : |
+        source ./emsdk/emsdk_env.sh
         mkdir -p publish
         cd publish
         ar -x ${HOME}/opt/lib/libcob.a
