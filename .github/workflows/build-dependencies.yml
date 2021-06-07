@@ -36,12 +36,22 @@ jobs:
         cd libcob
         emmake make INCLUDES=-I${HOME}/opt/include
         make install
+    
+    - name: Combine libraries
+      run : |
+        mkdir -p publish
+        cd publish
+        ar -x ${HOME}/opt/lib/libcob.a
+        ar -x ${HOME}/opt/lib/libgmp.a
+        wasm-ld *.o -o libcob.so --relocatable --no-entry
+        rm *.a
+        cp ./gnucobol-3.0-rc1/libcob.h .
 
     - name: Release dependencies
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: /home/runner/opt/**/*
+        file: publish/*
         file_glob: true
         tag: 1.0
         overwrite: true
