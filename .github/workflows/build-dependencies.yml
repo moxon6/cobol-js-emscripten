@@ -19,7 +19,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        sudo apt-get install autopoint gettext
+        sudo apt-get install autopoint gettext wabt
     
     - name: Build libcob wasm
       run: |
