@@ -108,13 +108,13 @@
        Handle-KeyPress.
        ACCEPT LastPressed.
        EVALUATE LastPressed
-           WHEN "KeyA"
+           WHEN "KeyE"
                IF Player1Num IS GREATER THAN OR EQUAL TO PaddleSpeed
                    SUBTRACT PaddleSpeed FROM Player1Num
            WHEN "KeyD"
                IF Player1Num IS LESS THAN GameHeight - PaddleHeightNum
                    ADD PaddleSpeed TO Player1Num
-           WHEN "KeyL"
+           WHEN "KeyI"
                IF Player2Num IS GREATER THAN OR EQUAL TO PaddleSpeed
                    SUBTRACT PaddleSpeed FROM Player2Num
            WHEN "KeyJ"
